@@ -208,31 +208,7 @@ dotPlotsSuperImp <- function (yli,xla,yla){
   
   #return plot
   return(p)
-  # 
-  # #########################
-  # 
-  # p <-  p + geom_point(size = 3)
-  # p <- p + labs(x = NULL,y =NULL)#+ labs(x = "Participant code", y = "Classification performance") 
-  # p <- p+ geom_line(color="grey",alpha=0.7)
-  # # p<- p+geom_boxplot(aes(x=Type, y=Accuracy, alpha = 0.01, group =Type) )
-  # p <- p + geom_hline(yintercept = 0.5,linetype="dashed")
-  # p <- p+geom_text_repel(data= d2[d2$PID != "Mean" & d2$Type == "Calibration",], aes(label=PID), nudge_x = -0.2,segment.alpha=0.7,segment.color ="grey")
-  # 
-  # # p <- p + geom_text(data = d2[d2$PID != "Mean" & d2$Type == "Calibration",], aes(label=PID),  hjust = 1.5, color="black",check_overlap=FALSE)
-  # 
-  # # #add boxplot
-  # p <- p + geom_boxplot(data = d2[d2$PID != "Mean",],aes(x=Type, y=Accuracy, fill=Type, color = Type, group = Type),alpha=0.2,width=0.3)
-  # # 
-  # 
-  # 
-  # # #add Mean info
-  # # p <- p + geom_point(data=d2[d2$PID == "Mean",], aes(x=Type,y=Accuracy),size = 20,alpha=0.5)
-  # # p <- p + geom_line(data=d2[d2$PID == "Mean",], aes(x=Type,y=Accuracy),size = 2,alpha=0.2,color = "black")
-  # # 
-  # # p <- p+ guides(color=FALSE, fill =FALSE)
-  # # p <- p + scale_y_continuous (limits= yli, breaks = round(seq(yli[1],yli[2], by = 0.1),1))
-  # # 
-  # return(p)
+
 }
 
 
@@ -273,12 +249,6 @@ cvErrors <<- cvErrors[order(cvErrors$PID),]
 cvErrors <<- cvErrors[cvErrors$PID != "P05",]
 #get rid of unnecessary stuff
 cvErrors <<- cvErrors$CVError
-# 
-# cvErrors <<- read.table(paste(DIR,"cvErrors.txt",sep=""))
-# cvErrors <<- cvErrors$V1
-# # cvErrors2 <<- c(0.2607159185,0.4066519487,0.3033596059,0.3773070822,0.3717404237,0.3713410908,
-# #                0.4530739432,0.4462229686,0.4623351687,0.4516340784,0.4203425787,0.3264584148)
-# 
 
 
 
@@ -359,83 +329,6 @@ print(p)
 
 
 
-# ##generate barplots of d, including the mean
-# barplots <- function() {
-#   #Add the mean values as additional row
-#   means <- unlist(lapply(d[,c(8:11)],mean,na.rm=T))
-#   d <<- rbind(d,NA)
-#   d$PID[nrow(d)] <- "_Mean_"
-#   d[nrow(d),c(2:ncol(d))] <- c(1,rep(NA,5),means)
-#   
-#   d1 <- d[d$Condition == 1,]
-#   d3 <- d[d$Condition == 3,]
-#   
-#   p <- plot_ly(
-#     x = d1$PID,
-#     y = d1$Acc_Calibration,
-#     name = "Calibration",
-#     type = "bar")
-#   print(p)
-#   
-#   # p1 <- add_trace(p = last_plot(),
-#   #                 x = d1$PID,
-#   #                 y = d1$Acc_Overall,
-#   #                 name = "Implicit_1+3",
-#   #                 type = "bar")
-#   # print(p1)
-#   
-#   p3 <- add_trace(p = last_plot(),
-#                   x = d1$PID,
-#                   y = d1$Acc_Implicit,
-#                   name = "Implicit",
-#                   type = "bar")
-#   print(p3)
-#   
-#   
-#   p2 <- add_trace(p = last_plot(),
-#                   x = d1$PID,
-#                   y = d1$Acc_Inferred,
-#                   name = "Inferred",
-#                   type = "bar")
-#   print(p2)
-#   
-#   # p4 <- add_trace(p = last_plot(),
-#   #   x = d3$PID,
-#   #   y = d3$Acc_Implicit,
-#   #   name = "Impplicit_3",
-#   #   type = "bar")
-#   # print(p4)
-#   
-#   
-#   # 
-#   # rel_zero_mean = a$InferredRelevance - mean(a$InferredRelevance)
-#   # rel_bin  = rel_zero_mean > 0
-#   # rel_1_0  = rel_zero_mean + abs(min(rel_zero_mean))
-#   # rel_1_0  = rel_1_0/max(rel_1_0)
-#   # 
-#   # 
-# }
-
-
-
-# ##Renames participant ID
-# changePartName <- function (namOld,namNew) {
-#   d$PID[d$PID == namOld] <<- namNew
-#   
-# }
-# changePartName("H28","P08")
-# changePartName("H29","P09")
-# changePartName("H30","P10")
-# changePartName("H31","P11")
-# changePartName("H32","P12")
-# changePartName("H33","P13")
-# changePartName("H34","P14")
-# changePartName("H35","P15")
-# changePartName("H36","P16")
-# #Reject participants with calibration not better than random
-# rejectPart("P14")
-# rejectPart("P01")
-# rejectPart("P06")
 
 
 
